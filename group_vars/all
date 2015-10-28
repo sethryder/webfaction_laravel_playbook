@@ -1,0 +1,16 @@
+---
+# Webfaction Settings
+webfaction_user:
+webfaction_pass:
+
+#App Settings
+app_name:
+domain:
+github_repo:
+force_https: false
+run_migrations: true
+
+#Database Settings
+database_name:
+database_user:
+database_pass:

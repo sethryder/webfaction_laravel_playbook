@@ -1,0 +1,11 @@
+---
+- name: Install Composer, database, Laravel.
+  hosts: webfaction-laravel
+  remote_user: user
+
+  roles:
+    - common
+    - mariadb
+    - nginx
+    - php-fpm
+    - wordpress
