@@ -1,0 +1,29 @@
+---
+
+- name: Create the PHP 5.6 app
+  webfaction_app:
+    name: "{{ app_name }}"
+    state: present
+    type: static_php56
+    login_name: "{{webfaction_user}}"
+    login_password: "{{webfaction_pass}}"
+
+- name: Create the domain
+  webfaction_domain:
+    name: "{{ domain }}"
+    state: present
+    login_name: "{{webfaction_user}}"
+    login_password: "{{webfaction_pass}}"
+
+- name: Create the site
+  webfaction_site:
+    name: "{{ app_name }}"
+    state: present
+    host: "{{ domain }}"
+    subdomains:
+      - '{{ domain }}'
+    site_apps:
+      - ['{{ app_name }}', '/public']
+    https: "{{ enable_https }}"
+    login_name: "{{webfaction_user}}"
+    login_password: "{{webfaction_pass}}"
