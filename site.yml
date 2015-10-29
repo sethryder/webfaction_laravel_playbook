@@ -1,7 +1,7 @@
 ---
 - name: Setup Laravel
   hosts: webfaction-laravel
-  remote_user: username
+  remote_user: user
 
   roles:
     - php56_app

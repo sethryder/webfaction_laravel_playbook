@@ -1,6 +1,6 @@
 ---
 # Webfaction Settings
-webfaction_user: username
+webfaction_user: user
 webfaction_pass: password
 webfaction_machine: webxxx
 
@@ -12,6 +12,6 @@ enable_https: no
 run_migrations: true
 
 #Database Settings
-database_name:
-database_user:
-database_pass:
+database_type: mysql
+database_name: laravel_db
+database_pass: secret_pass

@@ -21,7 +21,7 @@
            php56 /home/{{ webfaction_user }}/composer.phar install
 
 - name: Copy env.sample file into place
-  copy: src=env.sample dest=/home/{{ webfaction_user }}/webapps/{{ app_name }}/.env
+  template: src=env.sample dest=/home/{{ webfaction_user }}/webapps/{{ app_name }}/.env
   when: first_run.stat.exists == False
 
 - name: Generate App key

@@ -36,3 +36,12 @@
     https: "{{ enable_https }}"
     login_name: "{{webfaction_user}}"
     login_password: "{{webfaction_pass}}"
+
+- name: Create database
+  webfaction_db:
+    name: "{{database_name}}"
+    password: "{{database_pass}}"
+    login_name: "{{webfaction_user}}"
+    login_password: "{{webfaction_pass}}"
+    type: "{{ database_type }}"
+    state: present
