@@ -1,13 +1,14 @@
 ---
 # Webfaction Settings
-webfaction_user:
-webfaction_pass:
+webfaction_user: username
+webfaction_pass: password
+webfaction_machine: webxxx
 
 #App Settings
-app_name:
-domain:
+app_name: laravel_app
+domain: www.laravel-app.com
 github_repo:
-force_https: false
+enable_https: no
 run_migrations: true
 
 #Database Settings

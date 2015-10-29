@@ -1,0 +1,3 @@
+---
+- name: Install composer
+  script: install_composer.sh creates=/home/{{ webfaction_user }}/composer.phar

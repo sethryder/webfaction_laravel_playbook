@@ -1,0 +1,33 @@
+---
+
+- name: Check if .ansible file exists
+  stat: path=/home/{{ webfaction_user }}/webapps/{{ app_name }}/.ansible
+  register: first_run
+
+- name: Remove default index.html file.
+  file: path=/home/{{ webfaction_user }}/webapps/{{ app_name }}/index.html state=absent
+  when: first_run.stat.exists == False
+
+- name: Install Laravel 5.1
+  command: chdir=/home/{{ webfaction_user }}/webapps/{{ app_name }}
+           php56 /home/{{ webfaction_user }}/composer.phar create-project laravel/laravel --prefer-dist --no-install --no-scripts .
+           creates=/home/{{ webfaction_user }}/webapps/{{ app_name }}/artisan
+
+- name: Copy modified composer.json
+  copy: src=composer.json dest=/home/{{ webfaction_user }}/webapps/{{ app_name }}/composer.json
+
+- name: Install Laravel dependencies
+  command: chdir=/home/{{ webfaction_user }}/webapps/{{ app_name }}
+           php56 /home/{{ webfaction_user }}/composer.phar install
+
+- name: Copy env.sample file into place
+  copy: src=env.sample dest=/home/{{ webfaction_user }}/webapps/{{ app_name }}/.env
+  when: first_run.stat.exists == False
+
+- name: Generate App key
+  command: php56 /home/{{ webfaction_user }}/webapps/ansible_test/artisan key:generate
+  when: first_run.stat.exists == False
+
+- name: Touch .ansible file
+  file: path=/home/{{ webfaction_user }}/webapps/{{ app_name }}/.ansible state=touch
+  when: first_run.stat.exists == False

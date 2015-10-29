@@ -8,6 +8,15 @@
     login_name: "{{webfaction_user}}"
     login_password: "{{webfaction_pass}}"
 
+- name: Create public symlink
+  webfaction_app:
+    name: "{{ app_name }}_public"
+    state: present
+    type: symlink56
+    extra_info: "/home/{{webfaction_user}}/webapps/{{ app_name }}/public"
+    login_name: "{{webfaction_user}}"
+    login_password: "{{webfaction_pass}}"
+
 - name: Create the domain
   webfaction_domain:
     name: "{{ domain }}"
@@ -17,13 +26,13 @@
 
 - name: Create the site
   webfaction_site:
-    name: "{{ app_name }}"
+    name: "{{ app_name }}_public"
     state: present
     host: "{{ domain }}"
     subdomains:
       - '{{ domain }}'
     site_apps:
-      - ['{{ app_name }}', '/public']
+      - ['{{ app_name }}_public', '/']
     https: "{{ enable_https }}"
     login_name: "{{webfaction_user}}"
     login_password: "{{webfaction_pass}}"
